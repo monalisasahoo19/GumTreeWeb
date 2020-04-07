@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
 using System.Text.RegularExpressions;
 using GumTreeSearchTest.Page;
 using NUnit.Framework;
@@ -60,7 +61,7 @@ namespace GumTreeSearchTest.Test
             var searchCountNumber = Convert.ToInt32(Regex.Match(_searchResultPage.PageSearchSelectedResult, @"\d+").Value);
             
             //This test is failing as expected doesn't match to actual result
-            Assert.AreEqual(searchCountNumber, _searchResultPage.SearchResults.Count, "Number of results on the page should match the number of results show in label.");
+            Assert.AreEqual(searchCountNumber, _searchResultPage.SearchResults.Count(), "Number of results on the page should match the number of results show in label.");
 
         }
 

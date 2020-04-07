@@ -17,7 +17,7 @@ namespace GumTreeSearchTest.Page
         }
 
         public IWebElement SearchResultSummary => _driver.FindElement(By.CssSelector("h1.breadcrumbs__summary--enhanced"), 30);
-        public ICollection<IWebElement> SearchResults => _driver.FindElements(By.CssSelector("section.search-results-page__user-ad-collection a.user-ad-row"));
+        public IEnumerable<IWebElement> SearchResults => _driver.FindElements(By.CssSelector("section.search-results-page__user-ad-collection a.user-ad-row"));
         private IWebElement PageSearchResultOptions => _driver.FindElement(By.CssSelector("div.results-per-page-selector"));
 
         public bool AssertPaginationActive(IWebElement pageLink) => pageLink.GetAttribute("class").Contains("page-number-navigation__link-number--current");
@@ -46,19 +46,18 @@ namespace GumTreeSearchTest.Page
            return pageLink;
         }
 
-        public IWebElement ClickOnRandomAdvert()
+        public void ClickOnRandomAdvert()
         {
-            var randomElementNumber = new Random().Next(1, SearchResults.Count -1);
-            var randomAdvert = SearchResults.ToList()[randomElementNumber];
+            var randomElementNumber = new Random().Next(1, SearchResults.Count() -1);
+            var randomAdvert = SearchResults.ElementAt(randomElementNumber);
             randomAdvert.Click();
             _driver.WaitUntilPageLoadsCompletely();
-            return randomAdvert;
         }
 
 
         private void ScrollToFooterResultSection()
         {
-            IJavaScriptExecutor je = (IJavaScriptExecutor)_driver;
+            var je = (IJavaScriptExecutor)_driver;
             je.ExecuteScript("arguments[0].scrollIntoView(false);", PageSearchResultOptions);
 
         }

@@ -15,11 +15,11 @@ namespace GumTreeSearchTest.Page
         }
 
         private IWebElement CategoriesDropDown => _driver.FindElement(By.Id("categoryId-wrp"));
-        private ICollection<IWebElement> ItemCategories => _driver.FindElements(By.CssSelector("div#categoryId-wrpwrapper > ul > li"));
+        private IEnumerable<IWebElement> ItemCategories => _driver.FindElements(By.CssSelector("div#categoryId-wrpwrapper > ul > li"));
         private IWebElement SearchQueryName => _driver.FindElement(By.Id("search-query"));
         private IWebElement LocationInput => _driver.FindElement(By.Id("search-area"));
         private IWebElement RadiusInput => _driver.FindElement(By.Id("srch-radius-input"));
-        private ICollection<IWebElement> DistanceRadiuses => _driver.FindElements(By.CssSelector("div#srch-radius-wrpwrapper > ul > li"));
+        private IEnumerable<IWebElement> DistanceRadiuses => _driver.FindElements(By.CssSelector("div#srch-radius-wrpwrapper > ul > li"));
         private IWebElement SearchButton => _driver.FindElement(By.CssSelector("button[type='submit']"));
       
         public void EnterSearchCriteria(string name, string itemName,string locationName,string radius)
